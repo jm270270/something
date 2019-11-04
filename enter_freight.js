@@ -28,11 +28,13 @@ function freight_create(){
 
 function search_product_barcode(){
 	var product_barcode = document.getElementById("product_barcode").value;
+	product_barcode = encodeURIComponent(product_barcode);
 	
 	xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
 			var temp = this.responseText.replace(/\s/g, '');
+			temp = decodeURIComponent(temp);
 			
             if (temp == "bad"){
 				var product_name = prompt("新的产品名称:", "");
@@ -56,13 +58,16 @@ function search_product_barcode(){
 
 function search_product_barcode2(x){
 	var i = x.parentNode.parentNode.rowIndex;
-	var product_barcode = document.getElementById("search_display").rows[i].cells[0].value;
+	var product_barcode = document.getElementById("search_display").rows[i-1].cells[0].innerHTML;
+	product_barcode = encodeURIComponent(product_barcode);
+	console.log(i);
 	
 	xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
 			var temp = this.responseText.replace(/\s/g, '');
-			
+			temp = decodeURIComponent(temp);
+			console.log(temp);
             if (temp == "bad"){
 //				var product_name = prompt("新的产品名称:", "");
 //				var content = prompt("容量:", "");
@@ -134,7 +139,7 @@ function update_freight(){
 				  		"\n线路: " + shipping_line +
 				  		"\n帐号: " + account + 
 				  		"\n收件人: " + receiver +
-				  		"\n所有商品: " + product_list.replace(/&nbsp;/g, ' '))) {
+				  		"\n所有商品: " + product_list)) {
 			update_freight_info();
 			update_freight_description();
 			alert("你已经成功上传此运单信息到数据库")
@@ -196,12 +201,11 @@ function update_freight_description(){
 //					document.getElementById("haha").innerHTML += this.responseText;
     			}
 			};
-			
 			xmlhttp.open("GET",
 						 "enter_freight_detail_update_description.php?product_barcode=" + product_barcode + 
-						 	"&product_name=" + product_name.replace(/&nbsp;/g, ' ') +
+						 	"&product_name=" + product_name +
 						 	"&amount=" + amount +
-						 	"&content_unit=" + content_unit.replace(/&nbsp;/g, ' ') +
+						 	"&content_unit=" + content_unit +
 						 	"&price=" + price,
 						 true);
 			xmlhttp.send();
@@ -217,6 +221,7 @@ function update_freight_description(){
 }
 
 function insert_product(product_barcode, product_name, content, unit, price){
+	console.log(product_barcode);
 	
 	xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -313,6 +318,7 @@ function search_product_name(){
 			if (this.readyState == 4 && this.status == 200) {
 				document.getElementById("search_display").innerHTML = this.responseText;
 				document.getElementById("search_display").style.color = "BLACK";
+				console.log(this.responseText);
 			}
 		};
 
@@ -338,6 +344,7 @@ function search_freight_20(){
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
 			var temp = this.responseText.replace(/\s/g, '');
+			console.log(temp);
 			document.getElementById("display").innerHTML = this.responseText;
     	}
     };
@@ -346,11 +353,3 @@ function search_freight_20(){
 				 true);
     xmlhttp.send();
 }
-
-function text1(x){
-	var i = x.parentNode.parentNode.rowIndex;
-//	var product_name = document.getElementById("display").rows[i-1].cells[1].innerHTML;
-//	document.getElementById("haha").innerHTML = product_name;
-	console.log(document.getElementById("display").getElementsByTagName("th").item(1).innerHTML);
-}
-

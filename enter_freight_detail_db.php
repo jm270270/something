@@ -41,7 +41,7 @@ if ($result->num_rows > 0) {
     }
 	echo "<tr>" . 
 		"<th contenteditable='true'>" . $barcode . "</th>" . 
-		"<th contenteditable='true' onKeyUp='text1(this)'>" . $product_name . "</th>" .
+		"<th contenteditable='true'>" . $product_name . "</th>" .
 		"<th contenteditable='true'>" . 1 . "</th>" .
 		"<th contenteditable='true'>" . $content . " " . $unit . "</th>" .
 		"<th>" . $price . "</th>" . 

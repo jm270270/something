@@ -17,8 +17,7 @@ $product_name_search = $_GET["product_name"];
 
 $sql = "SELECT *
 		FROM product
-		WHERE product_name LIKE '%$product_name_search%'
-		OR barcode LIKE '%$product_name_search%'";
+		WHERE product_name LIKE '%$product_name_search%'";
 $result = $conn->query($sql);
 
 

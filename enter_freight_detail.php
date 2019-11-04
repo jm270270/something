@@ -31,11 +31,10 @@ if($_SESSION['login_user'] == false){
 			
 			<p>线路</p>
 			<select id = "shipping_line">
-			  	<option value="未选">未选</option>
-				<option value="奶粉线">奶粉线 MP</option>
-			  	<option value="食品线">食品线 SH</option>
-			  	<option value="普货线">普货线 JM</option>
-			  	<option value="香港线">香港线 HK</option>
+			  <option value="未选">未选</option>
+			  <option value="食品线">食品线 SH</option>
+			  <option value="普货线">普货线 JM</option>
+			  <option value="香港线">香港线 HK</option>
 			</select>
 			
 			<p>泛捷账号</p>

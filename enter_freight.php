@@ -29,29 +29,6 @@ if($_SESSION['login_user'] == false){
 		<input type="button" onclick="location.href='../index.php'" value="返回"/></br>
 	</form>
 	
-	<?php
-	require("../conn.php");
-	$sql = "SELECT count(*) AS temp
-			FROM freight_note";
-
-			$result = $conn->query($sql);
-
-
-
-			// output standard of table tag
-
-			if ($result->num_rows > 0) {
-				while($row = $result->fetch_assoc()) {
-					echo "总共运单数: <b>" . $row["temp"] ;
-				}
-			}
-			else{
-				echo "0 result";
-			}
-			
-			$conn->close();
-	?>
-	
 	<table border="1" id = "table_list">
 		<tr>
 			<th>运单条形码</th>
@@ -77,7 +54,7 @@ if($_SESSION['login_user'] == false){
 			$sql = "SELECT * 
 					FROM freight_note 
 					ORDER BY id DESC, date DESC
-					LIMIT 20";
+					LIMIT 5";
 
 			$result = $conn->query($sql);
 
@@ -119,5 +96,26 @@ if($_SESSION['login_user'] == false){
 		
 	</table>
 	
+	<?php
+	$sql = "SELECT count(*) AS temp
+			FROM freight_note";
+
+			$result = $conn->query($sql);
+
+
+
+			// output standard of table tag
+
+			if ($result->num_rows > 0) {
+				while($row = $result->fetch_assoc()) {
+					echo "总共运单数: <b>" . $row["temp"] ;
+				}
+			}
+			else{
+				echo "0 result";
+			}
+			
+			$conn->close();
+	?>
 </body>
 </html>
